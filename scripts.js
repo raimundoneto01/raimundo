@@ -36,8 +36,12 @@ function listarAlunos()
                                 <td>${lista[i].telefone}</td>
                                 <td>${lista[i].cidade}</td>
                                 <td>
-                                    <button class="btn btn-warning">Editar</button>
-                                    <button class="btn btn-danger">Deletar</button>
+                                    <button class="btn btn-warning"
+                                     type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightEditar"
+                                     aria-controls="offcanvasRightEditar" onclick="preencherForm(${i})"
+                                     >Editar</button>
+
+                                   <button class="btn btn-danger" onclick="deletarAluno(${i})">Deletar</button>
                                 </td>
                             </tr>`;
     }
@@ -55,5 +59,41 @@ function adicionarAluno()
     }
     lista.push(aluno);
     cadastro.reset();
+    document.querySelector(".offcanvas").classList.remove("show")
+    document.querySelector(".offcanvas-backdrop").classList.remove("show")
     listarAlunos();
 }
+
+function preencherForm(posicao){
+    let aluno = lista[posicao];
+    e_id.value = posicao;
+    e_nome.value = aluno.nome;
+    e_email.value = aluno.email;
+    e_telefone.value = aluno.telefone;
+    e_cidade.value = aluno.cidade;
+}
+
+function editarAluno(){
+    event.preventDefault();
+    let posicao = e_id.value;
+    lista[posicao].nome = e_nome.value;
+    lista[posicao].email = e_email.value;
+    lista[posicao].telefone = e_telefone.value;
+    lista[posicao].cidade = e_cidade.value;
+    editar.reset();
+    document.querySelector(".offcanvas").classList.remove("show")
+    document.querySelector(".offcanvas-backdrop").classList.remove("show")
+    listarAlunos();
+}
+function deletarAluno(posicao){
+    let novaLista = [];
+    for(let i = 0;i < lista.length;i++){
+        if(i != posicao){
+            novaLista.push(lista[i]);
+        }
+    }
+    lista = [];
+    lista = novaLista;
+    listarAlunos();
+}
+
