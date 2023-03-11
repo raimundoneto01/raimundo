@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div id="tela">
+        <div class="pontos"></div>
+        <div class="boneco"></div>
+        <div class="parede andando"></div>
+
+        <!-- <button class="btnStop">stop</button> -->
+        
+    </div>
+
+    <script>
+        let parede = document.querySelector("parede");
+        let boneco = document.querySelector("boneco");
+        let btnStop = document.querySelector("btnStop");
+
+        let paredeAndando = setInterval(function(){
+            
+            console.log(parede.offsetleft);
+        }, 1);
+
+        btnStop.addEventListener("click", function(){
+            clearInterval(paredeAndando);
+            parede.Style.left = parede.offsetleft+"px";
+            parede.classList.remove("andando");
+        })
+
+    
+        // setInterval(function(){
+        //     console.log(boneco.offsettop)
+        // }, 1);
+
+            // Ao clicar na tela o boneco pula
+        window.addEventListener("click", function(){
+            boneco.classList.add("pulando");
+
+              //Apos um tempo o boneco pula
+            setInterval(function(){
+                boneco.classList.remove("pulando");
+            }. 500)
+        })
+    </script>
+
+    
+    
+</body>
+</html>
